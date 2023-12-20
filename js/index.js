@@ -34,3 +34,7 @@ console.log(parson)
 console.log(personList[0])
 console.log(parson.old)
 
+var names = "吉田" + "大野"
+console.log(names)
+var culc = 5 / 13
+console.log(culc)
