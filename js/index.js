@@ -10,7 +10,8 @@ var p1 = document.getElementById("div1")
 var newP = document.createElement("p")
 
 p1.appendChild(newP)
-//
+
+
 
 // clickされたらconsoleに"click"が表示
 var btn = document.querySelector("#button")
@@ -30,9 +31,20 @@ window.addEventListener("scroll", function () {
 
 // buttonクリックで、子要素が追加、テキスト表示
 var btn2 = document.querySelector("#button2")
-var result = document.querySelector("#result")
+var popup = document.querySelector("#div2")
+var p2 = document.createElement("p")
 
 btn2.addEventListener("click", () => {
-  result.innerHTML = "よく押せました！えらい！"
-})
+
+  popup.appendChild(p2)
+  p2.innerHTML = "よく押せました！えらい！"
+}, false)
 // 
+
+// buttonクリックで、テキスト非表示
+var btn3 = document.querySelector("#button3")
+
+
+btn3.addEventListener("click", () => {
+  popup.removeChild(p2)
+}, false)
