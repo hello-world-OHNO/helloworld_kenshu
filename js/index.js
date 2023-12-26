@@ -1,50 +1,63 @@
-var text = document.getElementById("text")
-console.log(text)
+// A,Bどちらの所持金が多いか表示
+var Amoney = 8000
+var Bmoney = 12000
+var Cmoney = 3000
 
-var text2 = document.querySelector("#text")
-console.log(text2)
+if (Amoney > Bmoney) {
+  console.log("A君の所持金が多い: " + Aoney + "円")
+} else if (Amoney < Bmoney) {
+  console.log("B君の所持金が多い: " + Bmoney + "円")
+}
 
-// 空pタグの生成、div内に追加
-var p1 = document.getElementById("div1")
+// A,B,C　誰の所持金が多いか表示
+if (Amoney > Bmoney && Cmoney) {
+  console.log("A君の所持金が多い: " + Amoney + "円")
+} else if (Bmoney > Amoney && Cmoney) {
+  console.log("B君の所持金が多い: " + Bmoney + "円")
+} else if (Cmoney > Amoney && Bmoney) {
+  console.log("C君の所持金が多い: " + Cmoney + "円")
+}
 
-var newP = document.createElement("p")
+// ランダム結果ボタン
+var btn = document.querySelector("#button__random")
 
-p1.appendChild(newP)
+btn.addEventListener("click", (event) => {
+  var random = Math.floor(Math.random() * 100) + 1
+  var message = ""
+  if (random === 100) {
+    message = "満点！！"
+  } else if (random >= 80) {
+    message = "合格です"
+  } else if (random <= 30) {
+    message = "赤点です"
+  } else {
+    message = "不合格です"
+  }
 
-
-
-// clickされたらconsoleに"click"が表示
-var btn = document.querySelector("#button")
-
-btn.addEventListener("click", () => {
-  console.log("click")
-})
-//
-
-// scrollされたらconsoleに"scroll"と表示
-var scr = document.querySelector("#scroll")
-
-window.addEventListener("scroll", function () {
-  console.log("scroll")
-})
-//
-
-// buttonクリックで、子要素が追加、テキスト表示
-var btn2 = document.querySelector("#button2")
-var popup = document.querySelector("#div2")
-var p2 = document.createElement("p")
-
-btn2.addEventListener("click", () => {
-
-  popup.appendChild(p2)
-  p2.innerHTML = "よく押せました！えらい！"
+  alert(message)
 }, false)
-// 
 
-// buttonクリックで、テキスト非表示
-var btn3 = document.querySelector("#button3")
-
-
-btn3.addEventListener("click", () => {
-  popup.removeChild(p2)
+// テキスト入力でconsoleの変化
+var text = document.querySelector("#text1")
+var input = text.value
+text.addEventListener("keyup", (event) => {
+  // memo ※event,taragetについて復習
+  switch (event.target.value) {
+    case "saitama":
+      console.log("埼玉");
+      break;
+    case "tokyo":
+      console.log("東京");
+      break;
+    case "kanagawa":
+      console.log("神奈川");
+      break;
+    default:
+      console.log("未確認");
+  }
 }, false)
+
+
+
+// 勉強用
+
