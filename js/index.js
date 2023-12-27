@@ -1,36 +1,60 @@
-// 足し算
-console.log(100 + 80 + 75 + 70 + 80)
+// A,Bどちらの所持金が多いか表示
+var Amoney = 8000
+var Bmoney = 12000
+var Cmoney = 3000
 
-// 引き算
-console.log(100000 - 80000)
+if (Amoney > Bmoney) {
+  console.log("A君の所持金が多い: " + Aoney + "円")
+} else {
+  console.log("B君の所持金が多い: " + Bmoney + "円")
+}
 
-// 掛け算
-console.log(32 * 64)
+// A,B,C　誰の所持金が多いか表示
+if (Amoney > Bmoney && Cmoney) {
+  console.log("A君の所持金が多い: " + Amoney + "円")
+} else if (Bmoney > Amoney && Cmoney) {
+  console.log("B君の所持金が多い: " + Bmoney + "円")
+} else {
+  console.log("C君の所持金が多い: " + Cmoney + "円")
+}
 
-// 割り算
-console.log(10 / 2)
+// ランダム結果ボタン
+var btn = document.querySelector("#button__random")
 
-// インクリメント演算子 +1 
-// ↓最初にした間違い↓
-var num = 3
-console.log(num++)
-// ↓正しい表記↓
-var num = 3
-num++
-console.log(num)
+btn.addEventListener("click", (event) => {
+  var random = Math.floor(Math.random() * 100) + 1
+  var message = ""
+  if (random === 100) {
+    message = "満点！！"
+  } else if (random >= 80) {
+    message = "合格です"
+  } else if (random <= 30) {
+    message = "赤点です"
+  } else {
+    message = "不合格です"
+  }
 
-// インクリメント演算子 -1 
-var num2 = 0
-num2--
-console.log(num2)
+  alert(message)
+}, false)
 
-// 1~10の乱数 ※正直あんまり理解できていない
-var random = Math.floor(Math.random() * 10) + 1
-console.log(random)
-
-// 1,4,6の中で最も大きい数字を表示
-console.log(Math.max(1, 4, 6))
-
-// 1,4,6の中で最も小さい数字を表示
-console.log(Math.min(1, 4, 6))
+// テキスト入力でconsoleの変化
+var text = document.querySelector("#text1")
+text.addEventListener("keyup", (event) => {
+  // memo ※event,taragetについて復習
+  var value = event.target.value
+  console.log(event)
+  switch (value) {
+    case "saitama":
+      console.log("埼玉");
+      break;
+    case "tokyo":
+      console.log("東京");
+      break;
+    case "kanagawa":
+      console.log("神奈川");
+      break;
+    default:
+      console.log("未確認");
+  }
+}, false)
 

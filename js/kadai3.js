@@ -1,50 +1,36 @@
-var text = document.getElementById("text")
-console.log(text)
 
-var text2 = document.querySelector("#text")
-console.log(text2)
+// 足し算
+console.log(100 + 80 + 75 + 70 + 80)
 
-// 空pタグの生成、div内に追加
-var p1 = document.getElementById("div1")
+// 引き算
+console.log(100000 - 80000)
 
-var newP = document.createElement("p")
+// 掛け算
+console.log(32 * 64)
 
-p1.appendChild(newP)
+// 割り算
+console.log(10 / 2)
 
+// インクリメント演算子 +1 
+// ↓最初にした間違い↓
+var num = 3
+console.log(num++)
+// ↓正しい表記↓
+var num = 3
+num++
+console.log(num)
 
+// インクリメント演算子 -1 
+var num2 = 0
+num2--
+console.log(num2)
 
-// clickされたらconsoleに"click"が表示
-var btn = document.querySelector("#button")
+// 1~10の乱数 ※正直あんまり理解できていない
+var random = Math.floor(Math.random() * 10) + 1
+console.log(random)
 
-btn.addEventListener("click", () => {
-  console.log("click")
-})
-//
+// 1,4,6の中で最も大きい数字を表示
+console.log(Math.max(1, 4, 6))
 
-// scrollされたらconsoleに"scroll"と表示
-var scr = document.querySelector("#scroll")
-
-window.addEventListener("scroll", function () {
-  console.log("scroll")
-})
-//
-
-// buttonクリックで、子要素が追加、テキスト表示
-var btn2 = document.querySelector("#button2")
-var popup = document.querySelector("#div2")
-var p2 = document.createElement("p")
-
-btn2.addEventListener("click", () => {
-
-  popup.appendChild(p2)
-  p2.innerHTML = "よく押せました！えらい！"
-}, false)
-// 
-
-// buttonクリックで、テキスト非表示
-var btn3 = document.querySelector("#button3")
-
-
-btn3.addEventListener("click", () => {
-  popup.removeChild(p2)
-}, false)
+// 1,4,6の中で最も小さい数字を表示
+console.log(Math.min(1, 4, 6))
