@@ -58,7 +58,3 @@ text.addEventListener("keyup", (event) => {
   }
 }, false)
 
-
-
-// 勉強用
-
