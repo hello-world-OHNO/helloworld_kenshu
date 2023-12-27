@@ -5,7 +5,7 @@ var Cmoney = 3000
 
 if (Amoney > Bmoney) {
   console.log("A君の所持金が多い: " + Aoney + "円")
-} else if (Amoney < Bmoney) {
+} else {
   console.log("B君の所持金が多い: " + Bmoney + "円")
 }
 
@@ -14,7 +14,7 @@ if (Amoney > Bmoney && Cmoney) {
   console.log("A君の所持金が多い: " + Amoney + "円")
 } else if (Bmoney > Amoney && Cmoney) {
   console.log("B君の所持金が多い: " + Bmoney + "円")
-} else if (Cmoney > Amoney && Bmoney) {
+} else {
   console.log("C君の所持金が多い: " + Cmoney + "円")
 }
 
@@ -39,10 +39,11 @@ btn.addEventListener("click", (event) => {
 
 // テキスト入力でconsoleの変化
 var text = document.querySelector("#text1")
-var input = text.value
 text.addEventListener("keyup", (event) => {
   // memo ※event,taragetについて復習
-  switch (event.target.value) {
+  var value = event.target.value
+  console.log(event)
+  switch (value) {
     case "saitama":
       console.log("埼玉");
       break;
