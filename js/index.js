@@ -17,7 +17,6 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', 'api/response.txt', true);
 xhr.send()
 xhr.onload = function () {
-  console.log(xhr.response)
   var json2 = (xhr.response)
   var obj2 = JSON.parse(json2)
   console.log(obj2)
