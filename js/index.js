@@ -1,99 +1,102 @@
-// consoleに10回表示
-for (var i = 0; i < 10; i++) {
-  console.log("実行");
+// JSONオブジェクトをjavascriptで使用できるオブジェクトに変換し、consoleに表示
+var json = '{"Name":"Taro","Age":13,"gender":"male"}';
+var obj = JSON.parse(json);
+
+console.log(obj);
+
+// オブジェクトをJSONオブジェクトに変換し、consoleに表示しましょう
+var strings = { "Name": "Taro", "Age": 13, "gender": "male" }
+var jsonstrings = JSON.stringify(strings);
+
+console.log(jsonstrings);
+
+
+// XMLHttpxhrを使用し、非同期通信を行い、レスポンスをconsoleに表示
+var xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'api/response.txt', true);
+xhr.send()
+xhr.onload = function () {
+  var json2 = (xhr.response)
+  var obj2 = JSON.parse(json2)
+  console.log(obj2)
 }
 
-// 配列['apple', 'banana' , 'cat']の中身をそれぞれconsoleに表示
-var arr = ['apple', 'banana', 'cat']
-arr[1]
+// 取得したレスポンスをHTML(テーブル)に表示
 
-for (var i = 0; i < arr.length; i++) {
-  console.log(arr[i])
-}
+var button = document.getElementById('btn')
+button.addEventListener('click', function () {
 
-// 配列[1, 2. 3] を合計した値6をconsoleに表示
-var num = [1, 2, 3]
-var num2 = 0
-for (var i = 0; i < num.length; i++) {
-  num2 = num[i] + num2
-}
-console.log(num2)
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'api/response.txt', true);
+  xhr.send();
+  xhr.onload = function () {
+    var json2 = (xhr.response);
+    var dataArray = JSON.parse(json2);
+    var Array = dataArray.users
 
-// 配列A[1, 'yoshida', 2, 'oono', 3, 'honda']を数値と文字列の配列にし、それぞれconsoleに表示してください
+    // テーブルの要素を取得
+    var tbody = document.getElementById('myTable')
 
-var teams = [1, 'yoshida', 2, 'oono', 3, 'honda']
-var numbers = []
-var strings = []
+    // 配列をループしてテーブルに行とセルを追加
+    for (var i = 0; i < Array.length; i++) {
+      var row = tbody.insertRow(i);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
 
-for (var i = 0; i < teams.length; i++) {
-  // 説明変数
-  var team = teams[i]
-  // 
-  if (!isNaN(team)) {
-    strings[strings.length] = team
+      // 配列の各オブジェクトのプロパティをセルに表示
+      cell1.innerHTML = Array[i].Name;
+      cell2.innerHTML = Array[i].Age;
+      cell3.innerHTML = Array[i].gender;
+    }
+  };
+}, false);
+
+// フォーカスアウトしたときに、未入力または全角以外は「正しい名前を入力してください」というエラー文言
+
+var namearea = document.getElementById("name")
+namearea.addEventListener('blur', function (event) {
+  // 名前が未入力または全角以外の文字が含まれている場合にエラーメッセージを表示
+  if (namearea === '' || !namearea.value.match(/^[^\x01-\x7E\uFF61-\uFF9F]+$/)) {
+    document.getElementById('error').textContent = '正しい名前を入力してください。';
   } else {
-    numbers[numbers.length] = team
+    document.getElementById('error').textContent = '';
   }
-}
-console.log(numbers)
-console.log(strings)
+});
 
-// 100回ループさせ、奇数回のみ「1 + 3 + 5 ...」のように足し算し、結果をconsoleに表示
+// 未入力または、数値以外の場合は「正しい年齢を入力してください」というエラー文言
 
-var result = 0
+var agearea = document.getElementById("age")
+agearea.addEventListener('blur', function (event) {
+  // 数字以外の文字が含まれている場合にエラーメッセージを表示
+  if (agearea === '' || !agearea.value.match(/^[0-9]+$/)) {
+    document.getElementById('error2').textContent = '正しい年齢を入力してください。';
+  } else {
+    document.getElementById('error2').textContent = '';
+  }
+});
 
-for (var i = 0; i < 100; i++) {
-  if (i % 2 !== 0) {
-    result += i
-    continue;
+// メールアドレスのエラーメッセージ
+
+var mailarea = document.getElementById("mail")
+mailarea.addEventListener('blur', function (event) {
+  if (mailarea === '' || !mailarea.value.match(/^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/)) {
+    document.getElementById('error3').textContent = '正しいメールアドレスを入力してください。';
   }
   else {
-    // 何もしない
+    document.getElementById('error3').textContent = '';
   }
-}
-console.log(result)
+});
 
-// foreach文
-var array1 = ['a', 'b', 'c'];
-array1.forEach((element) => console.log(element));
+// 電話番号のエラーメッセージ
 
-// while文
-var n = 0;
-while (n < 3) {
-  n++;
-}
-console.log(n);
-
-// [2, 4, 6, 8]各indexに2を掛けた新しい配列を作成
-var array1 = [2, 4, 6, 8]
-var map1 = array1.map((x) => x * 2)
-console.log(map1)
-
-// [2, 4, 6, 7]の配列内に奇数が含まれているかを判定
-var array2 = [2, 4, 6, 7]
-var even = (element) => element % 2 === 0
-console.log(array2.some(even))
-
-// 以下配列からhasSubmittedが全てtrueかどうかを判定してください
-
-var hasSub = [
-  { id: 2, hasSubmitted: true },
-  { id: 3, hasSubmitted: false },
-  { id: 4, hasSubmitted: true },
-]
-var result1 = hasSub.every(item => item.hasSubmitted === true)
-console.log(result1)
-
-// 以下配列からhasSubmittedがtrueのものだけを抜き出し、新しい配列を作成
-// 🔼hassubを流用
-var result2 = hasSub.filter((word) => word.hasSubmitted === true)
-console.log(result2)
-
-// 以下配列をidの昇順に並べ替え
-var hasSub2 = [
-  { id: 323, hasSubmitted: true },
-  { id: 111, hasSubmitted: false },
-  { id: 268, hasSubmitted: true },
-]
-hasSub2.sort((a, b) => a.id - b.id)
-console.log(hasSub2)
+var telarea = document.getElementById("tel")
+telarea.addEventListener('blur', function (event) {
+  // 名前が未入力または全角以外の文字が含まれている場合にエラーメッセージを表示
+  if (telarea === '' || !telarea.value.match(/^[0-9]{11}$/)) {
+    document.getElementById('error4').textContent = '正しい電話番号を入力してください。';
+  } else {
+    document.getElementById('error4').textContent = '';
+  }
+});
