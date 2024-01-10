@@ -59,79 +59,94 @@ var images = [
 ]
 
 // シャッフル格納場所
-var yamahuda1 = []
-var yamahuda2 = []
+var dealer_deck = []
+var player_deck = []
+
+// シャッフル変数
+var shuffle_cards = images.length - 1
 
 // シャッフル要素(山札１)
-for (var i = images.length - 1; i >= 0; i--) {
+for (var i = shuffle_cards; i >= 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
-  yamahuda1.push(images[j])
+  dealer_deck.push(images[j])
 }
 // シャッフル要素(山札2)
-for (var i = images.length - 1; i >= 0; i--) {
+for (var i = shuffle_cards; i >= 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
-  yamahuda2.push(images[j])
+  player_deck.push(images[j])
 }
-
-// スタートを押すとyamahudaを上から順に配る 
-// 勝利判定、結果
 
 // ボタンの変数
 var start = document.querySelector("#btn1")
-// カード表示の変数
-var set1 = document.querySelector("#cards1__img")
-var set2 = document.querySelector("#cards2__img")
+
+// カード表示divの取得
+var dealer_div = document.querySelector("#cards1")
+var player_div = document.querySelector("#cards2")
+
+// 画像タグの挿入
+var dealer_set = document.createElement('img');
+dealer_set.width = "150";
+dealer_set.height = "200";
+var player_set = document.createElement('img');
+player_set.width = "150";
+player_set.height = "200";
+
 // クリックの変数
 var clickCount = 0
+
 // 結果の変数
 var result = document.querySelector("#result__text")
+
 // 勝利数の変数
-var won1 = document.querySelector("#won__text1")
-var won2 = document.querySelector("#won__text2")
-var wonCount1 = 0
-var wonCount2 = 0
+var dealer_won = document.querySelector("#won__text1")
+var player_won = document.querySelector("#won__text2")
+var dealer_wonCount = 0
+var player_wonCount = 0
 
-start.addEventListener('click', function (event) {
+// カウント変数
+var MAX_CLICK_COUNT = 52
+
+// スタート押下処理
+start.addEventListener('click', () => {
   clickCount += 1
-  if (clickCount <= 52) {
-    var selectCard1 = yamahuda1.shift()
-    var selectCard2 = yamahuda2.shift()
-
-    set1.src = selectCard1.url;
-    set2.src = selectCard2.url;
-    if (selectCard1.id >= selectCard2.id) {
-      wonCount1++;
-      result.textContent = "親の勝ち！";
-      won1.textContent = wonCount1;
-    }
-    else {
-      wonCount2++;
-      result.textContent = "子の勝ち！";
-      won2.textContent = wonCount2;
-    }
+  if (clickCount > MAX_CLICK_COUNT) return
+  dealer_div.appendChild(dealer_set)
+  player_div.appendChild(player_set)
+  var dealer_random_card = dealer_deck.shift();
+  var player_random_card = player_deck.shift();
+  dealer_set.src = dealer_random_card.url;
+  player_set.src = player_random_card.url;
+  if (dealer_random_card.id >= player_random_card.id) {
+    dealer_wonCount++;
+    result.textContent = "親の勝ち！";
+    dealer_won.textContent = dealer_wonCount;
   }
   else {
+    player_wonCount++;
+    result.textContent = "子の勝ち！";
+    player_won.textContent = player_wonCount;
+
   }
 });
 
 // リセット機能
 var reset = document.querySelector("#btn2")
 
-reset.addEventListener('click', function (event) {
+reset.addEventListener('click', () => {
   clickCount = 0;
-  wonCount1 = 0;
-  wonCount2 = 0;
+  dealer_wonCount = 0;
+  player_wonCount = 0;
   result.textContent = "";
-  won1.textContent = "";
-  won2.textContent = "";
-  set1.src = "";
-  set2.src = "";
-  for (var i = images.length - 1; i >= 0; i--) {
+  dealer_won.textContent = "";
+  player_won.textContent = "";
+  dealer_set.remove();
+  player_set.remove();
+  for (var i = shuffle_cards; i >= 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
-    yamahuda1.push(images[j])
+    dealer_deck.push(images[j])
   }
-  for (var i = images.length - 1; i >= 0; i--) {
+  for (var i = shuffle_cards; i >= 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
-    yamahuda2.push(images[j])
+    player_deck.push(images[j])
   }
 });
