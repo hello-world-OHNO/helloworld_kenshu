@@ -1,0 +1,147 @@
+/* ----------上部要素---------- */
+.top {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* トランプ表示箇所 */
+.top__cards1 {
+  height: 200px;
+  width: 150px;
+  border: solid 1px;
+}
+
+.top__cards2 {
+  height: 200px;
+  width: 150px;
+  border: solid 1px;
+}
+
+/* 勝敗結果表示 */
+.top__result {
+  height: 150px;
+  width: 400px;
+  border: solid 1px;
+  margin: 0 100px;
+}
+
+.top__result__text {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  font-size: 45px;
+}
+
+/* ----------中間要素---------- */
+.middle {
+  max-width: 1000px;
+  height: 200px;
+  margin-top: 20px;
+  position: relative;
+}
+
+/* 勝利数親/子 */
+.middle__win1 {
+  height: 90px;
+  width: 250px;
+  border: solid 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.middle__win2 {
+  height: 90px;
+  width: 250px;
+  border: solid 1px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* 親/子 */
+.middle__dealer {
+  height: 90px;
+  width: 250px;
+  border: solid 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.middle__dealer__text {
+  text-align: center;
+  font-size: 25px;
+}
+
+.middle__player__text {
+  text-align: center;
+  font-size: 25px;
+}
+
+.middle__player {
+  height: 90px;
+  width: 250px;
+  border: solid 1px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* ----------下部要素---------- */
+
+.bottom {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom__decks1 {
+  height: 200px;
+  width: 150px;
+}
+
+.bottom__decks2 {
+  height: 200px;
+  width: 150px;
+  margin-left: 20px;
+}
+
+.bottom__decks1__image {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+/* ----------最下層要素---------- */
+.foot {
+  max-width: 1000px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.foot__start {
+  height: 90px;
+  width: 322px;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.foot__start__btn {
+  font-size: 25px;
+}
+
+.foot__reset {
+  height: 90px;
+  width: 322px;
+  text-align: center;
+}
+
+.foot__reset__btn {
+  font-size: 25px;
+}

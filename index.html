@@ -2,64 +2,57 @@
 <html lang="ja">
 
 <head>
-  <link rel="stylesheet" type="text/CSS" href="./CSS/style2.css">
+  <link rel="stylesheet" type="text/CSS" href="./CSS/style3.css">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>
-    課題7、8
+    総合課題1
   </title>
 </head>
 
 <body>
-  <div id="div1">
-    <table id="myTable"></table>
-    <thead>
-      <tr></tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
+  <div class="top">
+    <div class="top__cards1" id="cards1">
+    </div>
+    <div class="top__result">
+      <p class="top__result__text" id="result__text"></p>
+    </div>
+    <div class="top__cards2" id="cards2">
+    </div>
   </div>
-  <button id="btn">取得</button>
-
-  <div class="text__lists1">
-    <dt>名前</dt>
-    <dd>
-      <input type="text" id="name" name="your-name">
-    </dd>
+  <div class="middle">
+    <div class="middle__win1">
+      <p class="middle__dealer__text" id="won__text1"></p>
+    </div>
+    <div class="middle__win2">
+      <p class="middle__player__text" id="won__text2"></p>
+    </div>
+    <div class="middle__dealer">
+      <p class="middle__dealer__text">親</p>
+    </div>
+    <div class="middle__player">
+      <p class="middle__player__text">子</p>
+    </div>
   </div>
-  <p id="error"></p>
-
-
-  <div class="text__lists1">
-    <dt>年齢</dt>
-    <dd>
-      <input type="text" id="age" name="your-age">
-    </dd>
+  <div class="bottom">
+    <div class="bottom__decks1">
+      <img class="bottom__decks1__image" src="https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust54.png"
+        alt="山札">
+    </div>
+    <div class="bottom__decks2">
+      <img class="bottom__decks1__image" src="https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust54.png"
+        alt="山札">
+    </div>
   </div>
-  <p id="error2"></p>
-
-
-  <div class="text__lists1">
-    <dt>メールアドレス</dt>
-    <dd>
-      <input type="text" id="mail" name="your-mail">
-    </dd>
+  <div class="foot">
+    <div class="foot__start">
+      <button id="btn1" class="foot__start__btn">ゲームスタート</button>
+    </div>
+    <div class="foot__reset">
+      <button id="btn2" class="foot__reset__btn">リセット</button>
+    </div>
   </div>
-  <p id="error3"></p>
-
-
-  <div class="text__lists1">
-    <dt>電話番号</dt>
-    <dd>
-      <input type="text" id="tel" name="your-phonenumber">
-    </dd>
-  </div>
-  <p id="error4"></p>
-
-
 
   <script src="js/index.js"></script>
-
-
 </body>
-
 
 </html>
