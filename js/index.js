@@ -60,12 +60,6 @@ var images = [
   { id: 999, url: "https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust53.png" },
 ]
 
-// シャッフル格納場所
-var dealer_deck = []
-var player_deck = []
-var dealer_deck_cheat = []
-var player_deck_cheat = []
-
 // シャッフル関数
 function arrayShuffle(array) {
   for (let i = (array.length - 1); 0 < i; i--) {
@@ -77,8 +71,11 @@ function arrayShuffle(array) {
   return array;
 }
 
-dealer_deck = arrayShuffle(images.slice());
-player_deck = arrayShuffle(images.slice());
+// シャッフル格納場所
+var dealer_deck = arrayShuffle(images.slice())
+var player_deck = arrayShuffle(images.slice());
+var dealer_deck_cheat = []
+var player_deck_cheat = []
 
 // ボタンの変数
 var start = document.querySelector("#btn1")
@@ -87,16 +84,16 @@ var start = document.querySelector("#btn1")
 var dealer_div = document.querySelector("#cards__left")
 var player_div = document.querySelector("#cards__right")
 
-// 画像タグの挿入
-var dealer_set = document.createElement('img')
-dealer_set.width = "150"
-dealer_set.height = "200"
-var player_set = document.createElement('img');
-player_set.width = "150";
-player_set.height = "200";
-
-// クリックの変数
-var clickCount = 0
+// 画像タグを生成する関数
+function createImageElement(width, height) {
+  const img = document.createElement('img');
+  img.width = width;
+  img.height = height;
+  return img;
+}
+// dealer_setとplayer_setを生成
+var dealer_set = createImageElement(150, 200);
+var player_set = createImageElement(150, 200);
 
 // チートボタンが押されたか判定
 var cheatButtonClicked = false;
@@ -113,11 +110,25 @@ var player_wonCount = 0
 // カウント変数
 var MAX_CLICK_COUNT = 53
 
+// クリックの変数
+var clickCount = 0
+
+// チートボタンが押された際の切り替わり回数
+var MAX_CHEAT_COUNT = 3
+
 // ３桁idデッキ
 var dealer_deck_3digits = images.filter(card => card.id >= 100 && card.id < 1000);
 
 // 2桁idデッキ
 var player_deck_2digits = images.filter(card => card.id >= 0 && card.id < 99);
+
+// 勝利時の挙動関数
+function updateResult(winnerCount, winnerText, winCount) {
+  result.textContent = winnerText;
+  winnerCount = winnerCount + 1;
+  winCount.textContent = winnerCount;
+  return winnerCount
+}
 
 // スタート押下処理
 start.addEventListener('click', () => {
@@ -138,7 +149,7 @@ start.addEventListener('click', () => {
   if (cheatButtonClicked) {
     dealer_deck_cheat = arrayShuffle(dealer_deck_3digits.slice());
     player_deck_cheat = arrayShuffle(player_deck_2digits.slice());
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < MAX_CHEAT_COUNT; i++) {
       dealer_deck.unshift(dealer_deck_cheat[i]);
       player_deck.unshift(player_deck_cheat[i]);
     }
@@ -152,9 +163,8 @@ start.addEventListener('click', () => {
 
   // 親の勝利条件
   if (dealer_random_card.id > player_random_card.id) {
-    dealer_wonCount++;
-    result.textContent = "親の勝ち！";
-    dealer_won.textContent = dealer_wonCount;
+    var newCount = updateResult(dealer_wonCount, "親の勝ち！", dealer_won)
+    dealer_wonCount = newCount
   }
   // 引き分け条件
   else if (dealer_random_card.id === player_random_card.id) {
@@ -162,15 +172,13 @@ start.addEventListener('click', () => {
   }
   // ジョーカー条件
   else if (dealer_random_card.id === 999 && player_random_card.id === 999) {
-    dealer_wonCount++;
-    result.textContent = "親の勝ち！";
-    dealer_won.textContent = dealer_wonCount;
+    var newCount = updateResult(dealer_wonCount, "親の勝ち！", dealer_won)
+    dealer_wonCount = newCount
   }
   // 子の勝利条件
   else {
-    player_wonCount++;
-    result.textContent = "子の勝ち！";
-    player_won.textContent = player_wonCount;
+    var newCount = updateResult(player_wonCount, "子の勝ち！", player_won)
+    player_wonCount = newCount
   }
   clickCount++;
 });
