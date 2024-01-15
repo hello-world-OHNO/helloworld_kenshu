@@ -56,50 +56,43 @@ var images = [
   { id: 114, url: "https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust37.png" },
   { id: 124, url: "https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust38.png" },
   { id: 134, url: "https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust39.png" },
-  // ジョーカーのカード画像
-  { id: 999, url: "https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust53.png" },
 ]
 
 // シャッフル格納場所
 var dealer_deck = []
 var player_deck = []
-var dealer_deck_cheat = []
-var player_deck_cheat = []
 
-// シャッフル関数
-function arrayShuffle(array) {
-  for (let i = (array.length - 1); 0 < i; i--) {
-    let r = Math.floor(Math.random() * (i + 1));
-    let tmp = array[i];
-    array[i] = array[r];
-    array[r] = tmp;
-  }
-  return array;
+// シャッフル変数
+var shuffle_cards = images.length - 1
+
+// シャッフル要素(山札１)
+for (var i = shuffle_cards; i >= 0; i--) {
+  var j = Math.floor(Math.random() * (i + 1));
+  dealer_deck.push(images[j])
 }
-
-dealer_deck = arrayShuffle(images.slice());
-player_deck = arrayShuffle(images.slice());
+// シャッフル要素(山札2)
+for (var i = shuffle_cards; i >= 0; i--) {
+  var j = Math.floor(Math.random() * (i + 1));
+  player_deck.push(images[j])
+}
 
 // ボタンの変数
 var start = document.querySelector("#btn1")
 
 // カード表示divの取得
-var dealer_div = document.querySelector("#cards__left")
-var player_div = document.querySelector("#cards__right")
+var dealer_div = document.querySelector("#cards1")
+var player_div = document.querySelector("#cards2")
 
 // 画像タグの挿入
-var dealer_set = document.createElement('img')
-dealer_set.width = "150"
-dealer_set.height = "200"
+var dealer_set = document.createElement('img');
+dealer_set.width = "150";
+dealer_set.height = "200";
 var player_set = document.createElement('img');
 player_set.width = "150";
 player_set.height = "200";
 
 // クリックの変数
 var clickCount = 0
-
-// チートボタンが押されたか判定
-var cheatButtonClicked = false;
 
 // 結果の変数
 var result = document.querySelector("#result__text")
@@ -111,76 +104,36 @@ var dealer_wonCount = 0
 var player_wonCount = 0
 
 // カウント変数
-var MAX_CLICK_COUNT = 53
-
-// ３桁idデッキ
-var dealer_deck_3digits = images.filter(card => card.id >= 100 && card.id < 1000);
-
-// 2桁idデッキ
-var player_deck_2digits = images.filter(card => card.id >= 0 && card.id < 99);
+var MAX_CLICK_COUNT = 52
 
 // スタート押下処理
 start.addEventListener('click', () => {
-  if (clickCount >= MAX_CLICK_COUNT) {
-    // クリック非活性化
-    start.disabled = true;
-    return;
-  }
-
-  if (clickCount >= 0) {
-    reset.disabled = false;
-    cheatButton.disabled = false;
-  }
-
+  clickCount += 1
+  if (clickCount > MAX_CLICK_COUNT) return
   dealer_div.appendChild(dealer_set)
   player_div.appendChild(player_set)
-  // イカサマボタンが押された時の処理
-  if (cheatButtonClicked) {
-    dealer_deck_cheat = arrayShuffle(dealer_deck_3digits.slice());
-    player_deck_cheat = arrayShuffle(player_deck_2digits.slice());
-    for (let i = 0; i < 3; i++) {
-      dealer_deck.unshift(dealer_deck_cheat[i]);
-      player_deck.unshift(player_deck_cheat[i]);
-    }
-    cheatButtonClicked = false;
-  }
-
   var dealer_random_card = dealer_deck.shift();
   var player_random_card = player_deck.shift();
   dealer_set.src = dealer_random_card.url;
   player_set.src = player_random_card.url;
-
-  // 親の勝利条件
-  if (dealer_random_card.id > player_random_card.id) {
+  if (dealer_random_card.id >= player_random_card.id) {
     dealer_wonCount++;
     result.textContent = "親の勝ち！";
     dealer_won.textContent = dealer_wonCount;
   }
-  // 引き分け条件
-  else if (dealer_random_card.id === player_random_card.id) {
-    result.textContent = "引き分け";
-  }
-  // ジョーカー条件
-  else if (dealer_random_card.id === 999 && player_random_card.id === 999) {
-    dealer_wonCount++;
-    result.textContent = "親の勝ち！";
-    dealer_won.textContent = dealer_wonCount;
-  }
-  // 子の勝利条件
   else {
     player_wonCount++;
     result.textContent = "子の勝ち！";
     player_won.textContent = player_wonCount;
+
   }
-  clickCount++;
 });
+
 // リセット機能
 var reset = document.querySelector("#btn2")
-reset.disabled = true;
 
 reset.addEventListener('click', () => {
   clickCount = 0;
-  cheatCount = 0;
   dealer_wonCount = 0;
   player_wonCount = 0;
   result.textContent = "";
@@ -188,17 +141,12 @@ reset.addEventListener('click', () => {
   player_won.textContent = "";
   dealer_set.remove();
   player_set.remove();
-  dealer_deck = arrayShuffle(images.slice());
-  player_deck = arrayShuffle(images.slice());
-  start.disabled = false;
-  reset.disabled = true;
-  cheatButton.disabled = true;
-});
-
-// イカサマボタン
-var cheatButton = document.querySelector("#btn3")
-cheatButton.disabled = true;
-
-cheatButton.addEventListener('click', () => {
-  cheatButtonClicked = true;
+  for (var i = shuffle_cards; i >= 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    dealer_deck.push(images[j])
+  }
+  for (var i = shuffle_cards; i >= 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    player_deck.push(images[j])
+  }
 });
