@@ -2,57 +2,23 @@
 <html lang="ja">
 
 <head>
-  <link rel="stylesheet" type="text/CSS" href="./CSS/style4.css">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>
-    総合課題2
+    DATE
   </title>
 </head>
 
 <body>
-  <div class="top">
-    <div class="top__cards__left" id="cards__left"></div>
-    <div class="top__result">
-      <p class="top__result__text" id="result__text"></p>
-    </div>
-    <div class="top__cards__right" id="cards__right"></div>
-  </div>
-  <div class="middle">
-    <div class="middle__win1">
-      <p class="middle__dealer__text" id="won__text1"></p>
-    </div>
-    <div class="middle__win2">
-      <p class="middle__player__text" id="won__text2"></p>
-    </div>
-    <div class="middle__dealer">
-      <p class="middle__dealer__text">親</p>
-    </div>
-    <div class="middle__player">
-      <p class="middle__player__text">子</p>
-    </div>
-  </div>
-  <div class="bottom">
-    <div class="bottom__decks1">
-      <img class="bottom__decks1__image" src="https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust54.png"
-        alt="山札">
-    </div>
-    <div class="bottom__decks2">
-      <img class="bottom__decks1__image" src="https://chicodeza.com/wordpress/wp-content/uploads/torannpu-illust54.png"
-        alt="山札">
-    </div>
-  </div>
 
-  <div class="foot">
-    <div class="foot__cheat">
-      <button id="btn3" class="foot__cheat__btn">イカサマ</button>
-    </div>
-    <div class="foot__start">
-      <button id="btn1" class="foot__start__btn">ゲームスタート</button>
-    </div>
-    <div class="foot__reset">
-      <button id="btn2" class="foot__reset__btn">リセット</button>
-    </div>
-  </div>
+  <input type="text" id="yearInput" placeholder="YYYY">年
+
+  <input type="text" id="monthInput" placeholder="MM">月
+
+  <input type="text" id="dayInput" placeholder="DD">日
+
+  <button onclick="showDay()">計算</button>
+
+  <div id="result"></div>
 
   <script src="js/index.js"></script>
 </body>
